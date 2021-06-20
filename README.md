@@ -15,3 +15,7 @@
 
 * npm i
 * ng serve
+
+![alt text](https://i.postimg.cc/VkFDn0LF/frontback.png)
+
+![alt text](https://i.postimg.cc/d0tnBQhc/front.png)

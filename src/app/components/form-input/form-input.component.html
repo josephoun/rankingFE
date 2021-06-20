@@ -1,0 +1,25 @@
+<div class="row">
+  <div>
+    <h3 class="title">Rank Words in a Wiki Topic</h3>
+    <form [formGroup]="rankingForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="form-group">
+          <label for="queryInput">Enter Wiki Topic</label>
+          <input type="text" class="form-control" formControlName="query" id="queryInput" aria-describedby="queryInput" placeholder="Topic Name..">
+        </div>
+      </div>
+      <button type="submit" [disabled]="!rankingForm.valid" class="btn btn-danger">Rank Words!</button>
+
+      <div *ngIf="rankingForm.controls['query'].invalid && (rankingForm.controls['query'].dirty || rankingForm.controls['query'].touched)" class="alert">
+        <div *ngIf="rankingForm.controls['query'].errors?.required">
+          <span class="errorMsg">Please enter a topic name</span>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="loading$|async">
+    <app-loader></app-loader>
+  </div>
+
+</div>

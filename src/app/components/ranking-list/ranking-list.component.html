@@ -1,0 +1,16 @@
+<div class="row">
+
+  <h4>Top Words Ranking</h4>
+  <h6>** Excluding verbs and some pre-defined constants words (see ./constants.js in backend files)</h6>
+  <div class="resultsContainer">
+    <ul *ngFor="let item of result$ | async">
+      <li>
+        <strong>{{item.word}}</strong>
+      </li>
+
+      <li>
+        <app-stars [stars]="item.rank"></app-stars>
+      </li>
+    </ul>
+  </div>
+</div>

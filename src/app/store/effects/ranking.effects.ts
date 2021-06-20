@@ -3,7 +3,8 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import {catchError, switchMap} from 'rxjs/operators';
 import { RankingService } from '../../services/ranking.service';
-import { RANK_QUERY, rankQuerySuccess, toggleLoading} from '../actions/ranking.actions';
+import {RANK_QUERY, RANK_QUERY_FAILURE, rankQuerySuccess, toggleLoading} from '../actions/ranking.actions';
+import {Observable, of} from "rxjs";
 
 @Injectable()
 export class RankingEffects {
@@ -15,7 +16,13 @@ export class RankingEffects {
     switchMap(result => [
       rankQuerySuccess(result),
       toggleLoading()
-    ])
+    ]),
+    catchError(err=> {
+      return of({
+        type: RANK_QUERY_FAILURE,
+        payload: { err}
+      }, toggleLoading());
+    })
   ));
 
   constructor(

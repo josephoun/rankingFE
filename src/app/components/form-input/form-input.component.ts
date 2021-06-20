@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {RankingService} from "../../services/ranking.service";
 import {toggleLoading, rankQuery} from "../../store/actions/ranking.actions";
-import {selectResult, selectLoading} from "../../store/selectors/ranking.selectors";
+import {selectResult, selectLoading, selectErrorMsg} from "../../store/selectors/ranking.selectors";
 
 import {Store, select } from "@ngrx/store";
 import {Observable} from "rxjs";
@@ -16,7 +16,7 @@ import {RANK} from "../../interfaces/rank";
 export class FormInputComponent implements OnInit {
 
   result$: Observable<Array<RANK>>;
-
+  errorMsg$: Observable<any>;
   loading$: Observable<any>;
 
   rankingForm = new FormGroup({
@@ -27,6 +27,7 @@ export class FormInputComponent implements OnInit {
   constructor(private rankingService: RankingService, private store: Store<{ result: []}>) {
     this.result$ = store.pipe(select(selectResult));
     this.loading$ = store.pipe(select(selectLoading));
+    this.errorMsg$ = store.pipe(select(selectErrorMsg));
   }
 
   ngOnInit(): void {

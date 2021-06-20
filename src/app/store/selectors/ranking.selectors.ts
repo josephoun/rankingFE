@@ -2,6 +2,7 @@ import { createSelector } from '@ngrx/store';
 
 export const selectResultState = (state: any) => state.result;
 export const selectLoadingState = (state: any) => state.loading;
+export const selectErrorMsgState = (state: any) => state.errorMsg;
 
 export const selectResult = createSelector(
   selectResultState,
@@ -11,4 +12,9 @@ export const selectResult = createSelector(
 export const selectLoading = createSelector(
   selectLoadingState,
   (loadingState: any) => loadingState.loading
+);
+
+export const selectErrorMsg = createSelector(
+  selectErrorMsgState,
+  (errorMsgState: any) => errorMsgState.errorMsg
 );
